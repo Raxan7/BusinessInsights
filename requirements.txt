@@ -102,5 +102,6 @@ urllib3==2.2.1
 wasabi==1.1.2
 wcwidth==0.2.13
 weasel==0.3.4
+whitenoise==6.6.0
 xtract==0.1a3
 yarl==1.9.4
