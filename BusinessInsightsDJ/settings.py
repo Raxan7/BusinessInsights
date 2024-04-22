@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'djangodoo',
+
     'main',
     'accounts',
 ]
@@ -130,4 +132,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+# AUTHENTICATION_BACKENDS = 'djangodoo.auth.OdooAuthBackend'
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ODOO_HOST = {
+#     'USER': 'saidi',
+#     'PASSWORD': 'blender1',
+#     'HOST': 'http://localhost',
+#     'PORT': 8069,
+#     'DB': 'dbname'
+# }

@@ -54,7 +54,7 @@ document.querySelector('#message-submit').onclick = function (e) {
                 document.getElementById('loadingAnimation').remove();
                 chatBox.innerHTML += `
                 <div class="msgBox p-2 rounded-md bg-[#deeeee] shadow-md">
-            <p id="role" class="font-bold">Gemini AI</p>
+            <p id="role" class="font-bold">Business Insights Bot</p>
             <p id="message">${data.message}</p>
         </div>`;
 
