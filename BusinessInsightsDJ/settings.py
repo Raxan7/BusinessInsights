@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 'djangodoo',
+    'rest_framework',
 
     'main',
     'accounts',

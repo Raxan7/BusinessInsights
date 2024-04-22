@@ -23,9 +23,9 @@ document.querySelector('#message-submit').onclick = function (e) {
         const message = inputElement.value;
         inputElement.value = "";
         chatBox.innerHTML += `<div class="msgBox p-2 border-2 rounded-md shadow-md ">
-        <p id="role" class="font-bold">user</p>
-        <p id="message">${message}</p>
-    </div>`
+            <p id="role" class="font-bold">user</p>
+            <p id="message">${message}</p>
+        </div>`
         chatBox.innerHTML += loader;
         chatBox.scrollTop = chatBox.scrollHeight ;
         const url = window.location.origin;
@@ -54,9 +54,9 @@ document.querySelector('#message-submit').onclick = function (e) {
                 document.getElementById('loadingAnimation').remove();
                 chatBox.innerHTML += `
                 <div class="msgBox p-2 rounded-md bg-[#deeeee] shadow-md">
-            <p id="role" class="font-bold">Business Insights Bot</p>
-            <p id="message">${data.message}</p>
-        </div>`;
+                    <p id="role" class="font-bold">Business Insights Bot</p>
+                    <p id="message">${data.message}</p>
+                </div>`;
 
 
             })

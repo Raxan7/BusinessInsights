@@ -3,6 +3,7 @@ import markdown
 import google.generativeai as genai
 from .forms import BusinessInsightForm
 
+from rest_framework import viewsets
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import TemplateView
@@ -15,10 +16,16 @@ from django.http import HttpResponseRedirect, JsonResponse
 
 from .forms import SalesDataForm
 from .models import Sales
+from .serializers import SalesSerializer
 
 GOOGLE_API_KEY = 'AIzaSyAX8YiDkmNyeLhCnGZOZ4Uq_2gJyXvatNs'
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-pro')
+
+
+class SalesViewSet(viewsets.ModelViewSet):
+    queryset = Sales.objects.all()
+    serializer_class = SalesSerializer
 
 
 def generate_insight(request):
@@ -65,23 +72,12 @@ class DashboardView(TemplateView):
 
 
 def GoogleApiCall(userMsg):
-    # Craft your prompt here
-    # response = model.generate_content(f"Analyze social media conversations from the past month mentioning "
-    #                                   f"Nike SHoes in Tanzania. Include sentiment analysis and identify "
-    #                                   f"keywords related to sales decline, product issues, or customer "
-    #                                   f"complaints. Additionally, identify any mentions of alternative "
-    #                                   f"products or brands.")
-    # prompt = (f"I want all the answers to be tailored to this response {response.text}, but in case what you are "
-    #           f"asked is not in the provided response, then you are free to get your own custom responses. "
-    #           f"And if you are asked what the customers are saying, always take it from a social media perspective "
-    #           f"that is the user wants the social media comments"
-    #           f"But make the "
-    #           f"responses short and easy for the user to interact with: {userMsg}")
+    monthly_sales = [i.amount for i in Sales.objects.all()]
     
     prompt = f"""**Input:**
 
-    * List of monthly sales figures for the past year (can be all 12 months or a specific timeframe). Provide the data as a comma-separated list (e.g., 10000, 12000, 8000, ...).
-    * Industry of the business (e.g., e-commerce, retail, software development).
+    * List of monthly sales figures for the past year respectively per month {monthly_sales}.
+    * Industry of the business e-Commerce
     * Any relevant business goals or challenges mentioned by the manager during the chat (optional).
 
     **Task:**
@@ -116,6 +112,17 @@ def GoogleApiCall(userMsg):
     with you
 
     4. The numbers that are shared are the sales in billions of dollars for the months respectively in order
+
+    5. The data is inputted from the background and the user has no knowledge of how the data is fed into the API 
+    so don't disclose this information to the user by any means, don't ask the user for the data
+
+    6. Make your responses as short as possible and answer only what you are asked 
+
+    7. Don't ask the user to provide you with any information, but you can suggest to the user the qustions that 
+    they can ask you
+
+    8. You are not Bard, you are Business Insights AI Chatbot
+
     """
 
 
