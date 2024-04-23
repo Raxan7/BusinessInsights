@@ -32,20 +32,8 @@ def generate_insight(request):
     if request.method == 'POST':
         form = BusinessInsightForm(request.POST)
         if form.is_valid():
-            country = form.cleaned_data['country']
-
-            genai.configure(api_key="AIzaSyAX8YiDkmNyeLhCnGZOZ4Uq_2gJyXvatNs")
-            model = genai.GenerativeModel('gemini-pro')
-
-            response = model.generate_content(f"Analyze social media conversations from the past month mentioning "
-                                              f"Nike SHoes in {country}. Include sentiment analysis and identify "
-                                              f"keywords related to sales decline, product issues, or customer "
-                                              f"complaints. Additionally, identify any mentions of alternative "
-                                              f"products or brands."
-                                              f"The response should not exceed a maximum of 100 words")
-            insight = markdown.markdown(response.text)
-
-            return render(request, 'main/business_insight.html', {'form': form, 'insight': insight})
+            # form.save()
+            return redirect("main:dashboard")
     else:
         form = BusinessInsightForm()
     return render(request, 'main/business_insight.html', {'form': form})
@@ -76,8 +64,8 @@ def GoogleApiCall(userMsg):
     
     prompt = f"""**Input:**
 
-    * List of monthly sales figures for the past year respectively per month {monthly_sales}.
-    * Industry of the business e-Commerce
+    * List of monthly sales figures for the past year (can be all 12 months or a specific timeframe). Provide the data as a comma-separated list (e.g., 10000, 12000, 8000, ...).
+    * Industry of the business (e.g., e-commerce, retail, software development).
     * Any relevant business goals or challenges mentioned by the manager during the chat (optional).
 
     **Task:**
@@ -86,6 +74,7 @@ def GoogleApiCall(userMsg):
     2. Generate concise and insightful responses that offer business advice to the manager based on the analysis.
     3. Consider the manager's industry and any specific goals/challenges mentioned to tailor the advice.
     4. Maintain a professional and informative tone while keeping responses short and to the point.
+    5. Find out *{userMsg}*
 
     **Examples of Insights:**
 
@@ -93,41 +82,12 @@ def GoogleApiCall(userMsg):
     * Suggest potential reasons for these trends (e.g., seasonality, marketing campaigns, competitor activity).
     * Recommend actions based on the analysis (e.g., adjust marketing strategies, optimize product offerings).
     * Provide relevant industry benchmarks or comparisons for context.
-    * Provide customer reviews if any on these products.
-    * In cases of sales decline, do tell the user if there are any competitors that the customers are going to.
-    * 
 
     **Output:**
 
-    * Text responses delivered in a conversational style, offering actionable business advice based on the analyzed data and manager's context.
-    
-    **Conditions**
-    1. This is the actual user input **{userMsg}**, sometimes it may not be relevant to the task that i, the programmer have trained
-    you on, so in cases where the user asks something irrelevant, guide the user to ask the right questions. Your first priority when 
-    responding should be the user input. But stay focused on the task that i have created you for.
-
-    2. Always try to make the response as short as possible but clear as well
-
-    3. When greeted by the user ensure that you respond in an appropriate way and guide tell the user who you are and how to interact 
-    with you
-
-    4. The numbers that are shared are the sales in billions of dollars for the months respectively in order
-
-    5. The data is inputted from the background and the user has no knowledge of how the data is fed into the API 
-    so don't disclose this information to the user by any means, don't ask the user for the data
-
-    6. Make your responses as short as possible and answer only what you are asked 
-
-    7. Don't ask the user to provide you with any information, but you can suggest to the user the qustions that 
-    they can ask you
-
-    8. You are not Bard, you are Business Insights AI Chatbot
-
-    """
+    * Text responses delivered in a conversational style, offering actionable business advice based on the analyzed data and manager's context."""
 
 
-    # Define your list of monthly sales figures
-    monthly_sales = [i.amount for i in Sales.objects.all()]  # Replace with your data
 
     # Define the industry (optional)
     industry = "E-commerce"
@@ -145,7 +105,9 @@ def GoogleApiCall(userMsg):
     # Generate response using Gemini API
     response = model.generate_content(full_prompt)
     # response = model.generate_content(prompt)
-    return response.text
+    # print(markdown.markdown(response.text))
+    parsed_response = markdown.markdown(response.text)
+    return parsed_response
 
 
 def chat(request):
