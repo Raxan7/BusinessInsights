@@ -49,7 +49,7 @@
         </div>`;
     </script>
 
-    <script src="{% static 'main/app.js'%}"></script>
+    <script src="{% static 'main/app_weekly.js'%}"></script>
 
 <div class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -65,13 +65,13 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="{% url 'main:dashboard' %}">
                         <i class="ti-panel"></i>
-                        <p>Yearly Insights</p>
+                        <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{% url 'main:weekly_insights' %}">
                         <i class="ti-panel"></i>
                         <p>Weekly Insights</p>
@@ -131,7 +131,7 @@
                                 <p class="category">Monthly performance Sales in billions of Dollars</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart" data-json="{{ data }}"></div>
+                                <div id="chartHours-Weekly" class="ct-chart" data-json="{{ data }}"></div>
                                 <div class="footer">
                                     <div class="chart-legend">
                                         <i class="fa fa-circle text-info"></i> Sales
