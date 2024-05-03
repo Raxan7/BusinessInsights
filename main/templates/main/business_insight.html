@@ -78,15 +78,27 @@
                 <li class="active">
                     <a href="{% url 'main:dashboard' %}">
                         <i class="ti-panel"></i>
-                        <p>Dashboard</p>
+                        <p>Yearly Insights</p>
                     </a>
                 </li>
-                {% comment %} <li>
-                    <a href="{% url 'main:chat' %}">
-                        <i class="ti-pie-chart"></i>
-                        <p>Chat</p>
+                <li>
+                    <a href="{% url 'main:weekly_insights' %}">
+                        <i class="ti-panel"></i>
+                        <p>Weekly Insights</p>
                     </a>
-                </li> {% endcomment %}
+                </li>
+                <li>
+                    <a href="{% url 'main:visualize_dataset' %}">
+                        <i class="ti-panel"></i>
+                        <p>Dataset Visual</p>
+                    </a>
+                </li>
+<!--                 <li>-->
+<!--                     <a href="{% url 'main:chat' %}">-->
+<!--                         <i class="ti-pie-chart"></i>-->
+<!--                         <p>Chat</p>-->
+<!--                     </a>-->
+<!--                 </li>-->
 <!--                <li>-->
 <!--                    <a href="table.html">-->
 <!--                        <i class="ti-files"></i>-->
@@ -99,12 +111,12 @@
 <!--                        <p>Geo location</p>-->
 <!--                    </a>-->
 <!--                </li>-->
-                <li>
+                {% comment %} <li>
                     <a href="{% url 'main:generate_insight' %}">
                         <i class="ti-comment"></i>
-                        <p>Insights</p>
+                        <p>Fetch Data</p>
                     </a>
-                </li>
+                </li> {% endcomment %}
             </ul>
     	</div>
     </div>

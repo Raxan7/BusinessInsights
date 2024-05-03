@@ -99,6 +99,40 @@ demo = {
         Chartist.Line('#chartHours-Weekly', dataSales, optionsSales, responsiveSales);
 
 
+        var dataSales = {
+          labels: ['Positive', 'Negative'],
+          series: [
+            [1800000, 1800000]
+          ]
+        };
+
+        var optionsSales = {
+          lineSmooth: false,
+          showArea: true,
+          height: "245px",
+          axisX: {
+            showGrid: false,
+          },
+          lineSmooth: Chartist.Interpolation.simple({
+            divisor: 3
+          }),
+          showLine: true,
+          showPoint: false,
+        };
+
+        var responsiveSales = [
+          ['screen and (max-width: 640px)', {
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Line('#dataVisuals', dataSales, optionsSales, responsiveSales);
+
+
         var data = {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [

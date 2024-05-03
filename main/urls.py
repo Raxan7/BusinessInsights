@@ -19,5 +19,7 @@ urlpatterns = [
     
     path('enter_sales_data/', views.enter_data_view, name='enter_sales_data'),
 
-    path('', views.weekly_insights, name='weekly_insights')
+    path('', views.weekly_insights, name='weekly_insights'),
+
+    path('visualization', views.visualize_data, name="visualize_dataset"),
 ]

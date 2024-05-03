@@ -60,6 +60,11 @@ def weekly_insights(request):
     return render(request, 'main/business_weekly.html', context)
 
 
+def visualize_data(request):
+    context = {}
+    return render(request, 'main/visualize.html', context)
+
+
 def chat(request):
     return render(request, 'main/chat.html')
 
