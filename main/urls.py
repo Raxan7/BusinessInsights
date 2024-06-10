@@ -21,5 +21,5 @@ urlpatterns = [
 
     path('', views.weekly_insights, name='weekly_insights'),
 
-    path('visualization', views.visualize_data, name="visualize_dataset"),
+    # path('visualization', views.visualize_data, name="visualize_dataset"),
 ]

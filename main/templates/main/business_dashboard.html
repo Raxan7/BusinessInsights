@@ -45,8 +45,7 @@
             <div class="input-box">
                 <input class="message-input" type="text" id="messageInput" placeholder="Type a message" />
                 <button type="button" class="send-button" id="message-submit">Send</button>
-            </div>
-        </div>`;
+            </d                                                                                                                                                      ;
     </script>
 
     <script src="{% static 'main/app.js'%}"></script>
@@ -59,7 +58,7 @@
         Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
     -->
 
-        <div class="sidebar-wrapper">
+        <div class="sidebar-wrapper">                     bnb
             <div class="logo">
                 <h2 class="text-center">SIMS</h2>
             </div>
@@ -77,12 +76,12 @@
                         <p>Weekly Insights</p>
                     </a>
                 </li>
-                <li>
+                {% comment %} <li>
                     <a href="{% url 'main:visualize_dataset' %}">
                         <i class="ti-panel"></i>
                         <p>Dataset Visual</p>
                     </a>
-                </li>
+                </li> {% endcomment %}
 <!--                 <li>-->
 <!--                     <a href="{% url 'main:chat' %}">-->
 <!--                         <i class="ti-pie-chart"></i>-->
