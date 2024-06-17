@@ -12,6 +12,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import ChatBot
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SalesDataForm
 from .models import Sales
@@ -24,6 +25,7 @@ class SalesViewSet(viewsets.ModelViewSet):
     serializer_class = SalesSerializer
 
 
+@csrf_exempt
 def generate_insight(request):
     if request.method == 'POST':
         form = BusinessInsightForm(request.POST)
@@ -55,20 +57,24 @@ class DashboardView(TemplateView):
         return context
     
 
+@csrf_exempt
 def weekly_insights(request):
     context = {}
     return render(request, 'main/business_weekly.html', context)
 
 
+@csrf_exempt
 def visualize_data(request):
     context = {}
     return render(request, 'main/visualize.html', context)
 
 
+@csrf_exempt
 def chat(request):
     return render(request, 'main/chat.html')
 
 
+@csrf_exempt
 def GeminiAi(request):
     if request.method == 'POST':
         data = request.body.decode('utf-8')
@@ -78,6 +84,7 @@ def GeminiAi(request):
     return JsonResponse("Invalid")
 
 
+@csrf_exempt
 def enter_data_view(request):
     if request.method == "POST":
         form = SalesDataForm(request.POST)
@@ -92,7 +99,7 @@ def enter_data_view(request):
 
 
 # Weekly
-
+@csrf_exempt
 def GeminiAi_Weekly(request):
     if request.method == 'POST':
         data = request.body.decode('utf-8')
