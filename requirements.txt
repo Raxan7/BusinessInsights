@@ -20,7 +20,7 @@ configobj==5.0.8
 cymem==2.0.8
 decorator==5.1.1
 distro==1.9.0
-Django==5.0.3
+Django==5.0.7
 djangorestframework==3.15.1
 emoji==2.11.0
 emot==3.1
